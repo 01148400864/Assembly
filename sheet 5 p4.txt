@@ -1,0 +1,71 @@
+;Suppose that someone has a certain number of coins (pennies, nickels,dimes, quarters, fifty-cent pieces, and dollar coins)
+; and wants to know the total value of the coins, as well as how many coins there are.
+; Writea complete 80x86 assembly language to help
+
+.586
+.model flat
+include io.h
+.stack 4096
+.data
+prompt1 byte "Enter number of Pennies : ",0
+prompt2 byte "Enter number of Nickels : ",0
+prompt3 byte "Enter number of Dimes : ",0
+prompt4 byte "Enter number of Quarters : ",0
+prompt5 byte "Enter number of Fifty_Cents : ",0
+prompt6 byte "Enter number of Dollars : ",0
+n byte 40 dup(?),0
+num1 dword ?
+num2 dword ?
+num3 dword ?
+res byte "the result : ",0
+result byte 11 dup(?)
+result2 byte 11 dup(?)
+
+
+.code
+_MainProc proc
+input prompt1,n,40
+atod n
+mov num1,eax
+
+input prompt2,n,40
+atod n
+imul eax,5
+add num1,eax
+
+input prompt3,n,40
+atod n
+imul eax,10
+add num1,eax
+
+input prompt4,n,40
+atod n
+imul eax,25
+add num1,eax
+
+input prompt5,n,40
+atod n
+imul eax,50
+add num1,eax
+
+input prompt6,n,40
+atod n
+imul eax,100
+add num1,eax
+ 
+ cwd
+mov eax,num1
+mov edx,0
+mov ecx,100
+div ecx
+mov num1 ,eax
+dtoa result,num1
+mov num2,edx
+dtoa result2,num2
+output res,result, result2
+
+
+mov eax,0
+ret
+_MainProc endp
+end

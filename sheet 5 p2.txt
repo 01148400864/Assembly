@@ -1,0 +1,38 @@
+;Write a complete 80x86 assembly language program to prompt for
+;values of x, y, and z and display the value of the expression 2(x+y) + z.
+
+.586
+.model flat
+include io.h
+.stack 4096
+.data
+prompt1 byte "enter the first number",0
+prompt2 byte "enter the second number",0
+prompt3 byte "enter the third number",0
+num byte 40 dup(?)
+num11 dword ?
+res byte "the result is : ",0
+result byte 11 dup(?),0
+.code
+_MainProc proc
+input prompt1,num,40
+atod num
+mov num11,eax
+input prompt2,num,40
+atod num
+add num11,eax
+mov eax,num11
+imul eax,2
+mov num11,eax
+input prompt3,num,40
+atod num
+add num11,eax
+dtoa result,num11
+output res,result
+
+
+
+mov eax,0
+ret
+_MainProc endp
+end

@@ -1,0 +1,107 @@
+;Write a complete 80x86 assembly language program to prompt for four
+;pairs of grades and weighting factors. Each weighting factor indicates
+;how many times the corresponding grade is to be counted in the sum.
+;Display the weighted sum, the sum of the weights, and the weighted
+;average (WeightedSum/SumOfWeights). A sample run might look like
+;grade 1? 88
+;weight 1? 1
+;grade 2? 77
+;weight 2? 2
+;grade 3? 94
+;weight 3? 1
+;grade 4? 85
+;weight 4? 3
+;weighted sum: 591
+;sum of weights: 7
+;weighted average: 84
+
+.586
+.model flat
+include io.h
+.stack 4096
+.data
+prompt1 byte "Enter the first grade : ",0 
+prompt2 byte "Enter the second grade : ",0 
+prompt3 byte "Enter the third grade : ",0 
+prompt4 byte "Enter the fourth grade : ",0 
+prompt11 byte "enter the first weight : ",0
+prompt22 byte "enter the second weight : ",0
+prompt33 byte "enter the third weight : ",0
+prompt44 byte "enter the fourth weight : ",0
+n1 byte 40 dup(?),0
+num dword ?
+num1 dword ?
+num2 dword ?
+num3 dword ? 
+num4 dword ?
+num11 dword ?
+z  dword ?
+s  dword ?
+k  dword ?
+
+result1 byte 11 dup(?),0
+result2 byte 11 dup(?),0
+result3 byte 11 dup(?),0
+res1 byte "weighted sum:",0
+res2 byte "sum of weights:",0
+res3 byte "weighted average:",0
+.code
+_MainProc proc
+
+ input prompt1,n1,40
+ atod n1
+ mov num1,eax       
+
+ input prompt11,n1,40
+ atod n1
+ imul eax, num1
+ mov num1,eax
+
+ input prompt2,n1,40
+ atod n1
+ mov num2,eax 
+     
+
+ input prompt22,n1,40
+ atod n1
+ imul  eax ,num2
+  mov num2,eax
+
+
+ input prompt3,n1,40
+ atod n1
+ mov num3,eax
+     
+
+ input prompt33,n1,40
+ atod n1
+ imul  eax ,num3
+  mov num3,eax
+
+ input prompt3,n1,40
+ atod n1
+ mov num4,eax
+ 
+
+ input prompt33,n1,40
+ atod n1
+  imul  eax ,num4
+  mov num4,eax
+
+ add num1,eax
+ mov eax,num2
+ add num1,eax
+ mov eax,num3
+  add num1,eax
+
+   dtoa result1,num1
+   output res1,result1
+    
+
+
+ 
+
+mov eax,0
+ret
+_MainProc endp
+end

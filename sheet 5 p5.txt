@@ -1,0 +1,54 @@
+;Write a complete 80x86 assembly language program to prompt for four
+;grades and then display the sum and the average (sum/4) of the grades
+
+.586
+.model flat
+include io.h
+.stack 4096
+.data
+prompt1 byte "Enter the first degree : ",0 
+prompt2 byte "Enter the second degree : ",0 
+prompt3 byte "Enter the third degree : ",0 
+prompt4 byte "Enter the fourth degree : ",0 
+n byte 40 dup(?),0
+num1 dword ?
+num2 dword ?
+result byte 11 dup(?),0
+result2 byte 11 dup(?),0
+res1 byte "the sum is :",0
+res2 byte "the Avg is :",0
+res3 byte " : "
+
+.code
+_MainProc proc
+input prompt1,n,40
+atod n
+mov num1,eax
+
+input prompt2,n,40
+atod n
+add num1,eax
+
+input prompt3,n,40
+atod n
+add num1,eax
+
+input prompt4,n,40
+atod n
+add num1,eax
+dtoa result , num1
+output res1,result
+cwd
+mov eax ,num1
+mov edx,0
+mov ecx,4
+div ecx
+mov num1,eax
+dtoa result , num1
+mov num2,edx
+dtoa result2,num2
+output res2,result,result2
+mov eax,0
+ret
+_MainProc endp
+end

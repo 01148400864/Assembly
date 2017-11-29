@@ -1,0 +1,35 @@
+;Write a complete 80x86 assembly language program to prompt for the
+;length and width of a rectangle and to display its perimeter (2*length+ 2*width).\
+
+.586
+.model flat
+include io.h
+.stack 4096
+.data
+prompt1 byte "enter the length" ,0
+prompt2 byte "enter the width" ,0
+res byte "the perimeter is : ",0
+num byte 40 dup(?),0
+num1 dword ?
+num2 dword ?
+result byte 11 dup(?),0
+
+.code
+_MainProc proc
+input prompt1,num,40
+atod num
+imul eax,2
+mov num1,eax
+
+input prompt2,num,40
+atod num
+imul eax,2
+add num1,eax
+dtoa result,num1
+output res,result
+
+
+mov eax,0
+ret
+_MainProc endp
+end
